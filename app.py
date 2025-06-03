@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-
+import os
 app = Flask(__name__)
 
 @app.route("/")
@@ -31,6 +31,6 @@ def calculate():
 
     return jsonify({"a": a, "b": b, "operation": operation, "result": result})
 
+
 if __name__ == "__main__":
-    import os
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
