@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Math Calculator API</title>
+    <meta charset="UTF-8">
+    <title>Math Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script>
         async function calculate() {
             const a = document.getElementById("a").value;
@@ -17,25 +19,21 @@
             });
 
             const data = await response.json();
-
-            if (data.error) {
-                document.getElementById("result").innerText = "Error: " + data.error;
-            } else {
-                document.getElementById("result").innerText = `Result: ${data.result}`;
-            }
+            document.getElementById("result").innerText = 
+                data.result !== undefined ? `Result: ${data.result}` : `Error: ${data.error}`;
         }
     </script>
 </head>
 <body>
-    <h1>Math Web Service</h1>
+    <h2>Simple Math Calculator</h2>
 
-    <label for="a">Number A:</label>
-    <input type="number" id="a"><br><br>
+    <label for="a">Number A:</label><br>
+    <input type="number" id="a" required><br><br>
 
-    <label for="b">Number B:</label>
-    <input type="number" id="b"><br><br>
+    <label for="b">Number B:</label><br>
+    <input type="number" id="b" required><br><br>
 
-    <label for="operation">Operation:</label>
+    <label for="operation">Choose an Operation:</label><br>
     <select id="operation">
         <option value="add">Add</option>
         <option value="subtract">Subtract</option>
