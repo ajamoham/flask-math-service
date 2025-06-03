@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Math Calculator API</title>
+    <script>
+        async function calculate() {
+            const a = document.getElementById("a").value;
+            const b = document.getElementById("b").value;
+            const operation = document.getElementById("operation").value;
+
+            const response = await fetch("/calculate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ a, b, operation })
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                document.getElementById("result").innerText = "Error: " + data.error;
+            } else {
+                document.getElementById("result").innerText = `Result: ${data.result}`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Math Web Service</h1>
+
+    <label for="a">Number A:</label>
+    <input type="number" id="a"><br><br>
+
+    <label for="b">Number B:</label>
+    <input type="number" id="b"><br><br>
+
+    <label for="operation">Operation:</label>
+    <select id="operation">
+        <option value="add">Add</option>
+        <option value="subtract">Subtract</option>
+        <option value="multiply">Multiply</option>
+        <option value="divide">Divide</option>
+    </select><br><br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <p id="result"></p>
+</body>
+</html>
